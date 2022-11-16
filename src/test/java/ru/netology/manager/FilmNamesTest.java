@@ -89,4 +89,53 @@ public class FilmNamesTest {
         FilmNames[] actual = manager.findAll();
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldUnderLimit() {
+        FilmNamesManager manager = new FilmNamesManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        FilmNames[] expected = {film3, film2, film1};
+        FilmNames[] actual = manager.findLast();
+        assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void shouldLimit() {
+        FilmNamesManager manager = new FilmNamesManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        manager.add(film9);
+        manager.add(film10);
+        FilmNames[] expected = {film10, film9, film8, film7, film6, film5, film4, film3, film2, film1};
+        FilmNames[] actual = manager.findLast();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldOverLimit() {
+        FilmNamesManager manager = new FilmNamesManager();
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+        manager.add(film6);
+        manager.add(film7);
+        manager.add(film8);
+        manager.add(film9);
+        manager.add(film10);
+        manager.add(film11);
+        FilmNames[] expected = {film11, film10, film9, film8, film7, film6, film5, film4, film3, film2};
+        FilmNames[] actual = manager.findLast();
+        assertArrayEquals(expected, actual);
+    }
 }
